@@ -1,50 +1,55 @@
-# STM32 Microcontroller Drivers
+# Proximity Sensor STM32
 
-This repository contains a collection of drivers for the STM32 family of microcontrollers. These drivers are designed to interface with various peripherals and features of the STM32 series, making it easier to develop embedded applications.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Supported STM32 Series](#supported-stm32-series)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Introduction
-
-STM32 microcontrollers are widely used in embedded systems due to their flexibility and performance. This repository provides a set of drivers that facilitate communication with different peripherals, including GPIO, UART, SPI, I2C, ADC, and more.
-
-The drivers are written in C and are designed to be lightweight and efficient, suitable for both hobbyist projects and professional applications.
+A simple proximity sensor system that alerts drivers before a potential collision. The system uses an ultrasonic sensor to measure the distance to an object, and activates an LED and a buzzer. The buzzer alternates with a frequency proportional to the distance to the object—closer objects cause faster buzzing, providing an intuitive warning to the driver.
 
 ## Features
 
-- **Modular Design:** Each driver is independent, allowing you to include only the drivers you need.
-- **Low-Level Abstraction:** Direct access to hardware registers for maximum control.
-- **Easy Integration:** Simple API for quick and easy integration into your projects.
-- **Documentation:** Detailed comments and usage examples for each driver.
+- **Proximity Detection**: Monitors the distance between the vehicle and nearby objects.
+- **LED Alert**: LED lights up when an object is within a set range.
+- **Buzzer Warning**: Audible buzzer that increases frequency as the distance decreases.
+- **Custom STM32 Drivers**: The project uses custom-made drivers for STM32 to control the peripherals, all included in the repo, and at https://github.com/AhmedSaid3617/STM32-Drivers .
+- **Real-time Monitoring**: Continuously tracks distance and sends it over UART module.
 
-## Internal Peripherals
-- [GPIO](./drivers/src/gpio.c)
-- [EXTI](./drivers/src/exti.c)
-- [NVIC](./drivers/src/gpio.c)
-- [SysTick](./drivers/src/systick.c)
+## Components
 
-## External Peripherals
-External peripherals are external modules that should be connected to your STM32 as specified in the docs or comments in the respective dirver source files.
-- [Keypad](./drivers/src/keypad.c)
+- **Ultrasonic Sensor**: Measures distance to nearby objects.
+- **STM32F103C6 Microcontroller**: Processes the data and controls the LED and buzzer using custom drivers.
+- **LED**: Turns on when an object is detected within a certain range.
+- **Buzzer**: Emits sound that increases in frequency as the object gets closer.
+- **Resistors, Wires, and Power Supply**: For connections and power management.
+
+## How It Works
+
+1. The proximity sensor continuously measures the distance directly in front of it.
+2. When an object is detected within a preset range (50 cm), the LED turns on.
+3. The buzzer starts sounding, and its frequency increases as the distance decreases.
+4. The system is designed to provide drivers with a clear and intuitive warning before a potential crash.
+
+## Custom STM32 Drivers
+
+This project uses custom drivers written specifically for the STM32F103C6 microcontroller to manage the proximity sensor, LED, and buzzer. These drivers allow for precise control over the peripherals, ensure efficient communication with the hardware components, and makes compiling the project easier.
+
+- **GPIO Control**: For managing the LED and buzzer.
+- **Timers**: Used to handle the sensor data and buzzer frequency adjustment.
+- **UART**: Used to send distance in real-time for testing purposes as well as to be graphed or recorded.
+- **Interrupts**: Used to precisely measure the time of the ECHO pulse in the ultrasonic sensor.
+
+
+## Recommended compilation and installation tools.
+1. **Installation**: Clone the github repo.
+2. **ARM GCC toolchain**: To compile the project.
+3. **GNU make**: To use the included Makefile
+4. **OpenOCD**: To flash the code.
 
 ## Usage
 
-Each driver is located in its respective directory within the `src` folder. To use a driver, include the header file in your source code:
-
-```c
-#include "gpio.h"
-#include "keypad.h"
+1. **Setup**: Connect the ultrasonic sensor, LED, and buzzer to the STM32 microcontroller as per the circuit diagram. Connect UART3 module to your PC if required.
+2. **Code**: Compile and flash the provided code using the makefile.
 ```
+make
+```
+3. **Run**: Power the system and place it in a vehicle or test environment. The LED and buzzer will respond when objects come within the set distance.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE.md) file for details.
-
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
