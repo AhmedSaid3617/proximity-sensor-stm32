@@ -50,6 +50,9 @@ make
 ```
 3. **Run**: Power the system and place it in a vehicle or test environment. The LED and buzzer will respond when objects come within the set distance.
 
+## Demo
+![](images/demo.gif)
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
