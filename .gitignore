@@ -2,3 +2,5 @@
 build
 *.bin
 *.elf
+*.elf.asm
+proteus

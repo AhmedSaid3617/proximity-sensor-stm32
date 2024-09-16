@@ -18,6 +18,11 @@ A simple proximity sensor system that alerts drivers before a potential collisio
 - **Buzzer**: Emits sound that increases in frequency as the object gets closer.
 - **Resistors, Wires, and Power Supply**: For connections and power management.
 
+## Circuit Diagram
+<p align="center">
+  <img src="images/circuit.png" width="500" title="Circuit Diagram">
+</p>
+
 ## How It Works
 
 1. The proximity sensor continuously measures the distance directly in front of it.
